@@ -14,12 +14,12 @@ object Application extends Controller {
     )(MatchingInput.apply)(MatchingInput.unapply))
 
   def index = Action {
-    Ok(views.html.index)
+    Ok(views.html.index())
   }
 
   def doMatch = Action {
     implicit request => matchingForm.bindFromRequest.fold(
-      _ => BadRequest(views.html.index),
+      _ => BadRequest(views.html.index()),
       matchingInput => Redirect(routes.Application.index))
   }
 }
