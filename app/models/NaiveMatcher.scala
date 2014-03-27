@@ -5,15 +5,14 @@ import scala.annotation.tailrec
 object NaiveMatcher extends StringMatcher {
 
   override def matchPatternToText(pattern: String)(text: String) = {
+
     @tailrec
-    def matchTextBeginningFrom(i: Int)(result: List[Int]): List[Int] = {
-      if (i == text.length) result
-      else matchTextBeginningFrom(i+1){
-        if (text.substring(i).startsWith(pattern)) i :: result
-        else result
-      }
+    def matchFrom(result: List[Int])(from: Int): List[Int] = {
+      if (from > text.length - pattern.length) result
+      else if (text.substring(from, pattern.length + from) == pattern) matchFrom(from :: result)(pattern.length + from)
+      else matchFrom(result)(1 + from)
     }
 
-    matchTextBeginningFrom(0)(Nil) reverse
+    matchFrom(Nil)(0) reverse
   }
 }

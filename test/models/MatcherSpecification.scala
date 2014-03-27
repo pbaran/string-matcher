@@ -14,5 +14,9 @@ class MatcherSpecification extends Specification {
     "not match any occurrences" in {
       matcher.matchPatternToText("cba")("abc cab bca bac") must beEmpty
     }
+
+    "not match overlapping occurrences" in {
+      matcher.matchPatternToText("abab")("abababab") must equalTo(List(0, 4))
+    }
   }
 }
