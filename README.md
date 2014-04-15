@@ -1,4 +1,4 @@
 string-matcher
 ==============
 
-exercises to know scala, play
+exercises to meet scala, play
